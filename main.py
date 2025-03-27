@@ -3,6 +3,7 @@ import sys
 import numpy as np
 from random import randint
 
+
 pygame.init()
 
 pygame.display.set_caption("Particle Life")
@@ -14,8 +15,8 @@ SIMULATION_WIDTH, SIMULATION_HEIGHT = SIMULATION_SIZE = SIMULATION.get_size()
 CLOCK = pygame.Clock()
 
 # particles amount
-PARTICLES_GROUPS = 2
-PARTICLES_AMOUNT = 10
+PARTICLES_GROUPS = 10
+PARTICLES_AMOUNT = 1000
 PARTICLES_GROUP = int(PARTICLES_AMOUNT / PARTICLES_GROUPS)
 
 # particles groups
@@ -25,12 +26,13 @@ particles_acceleration = np.array([np.array([(0, 0) for _ in range(0, PARTICLES_
 particles_render = np.array([pygame.Surface((1, 1)) for _ in range(0, PARTICLES_GROUPS)])
 
 # setting color to particles groups
-"""
-for particle in particles_renders:
-    particle.fill((randint(0, 255), randint(0, 255), randint(0, 255)))
-"""
-particles_render[0].fill((255, 0, 0))
-particles_render[1].fill((0, 255, 0))
+color_range = int(300 / PARTICLES_GROUPS)
+color_value = 0
+color = pygame.Color(0)
+for i in range(0, PARTICLES_GROUPS):
+    color.hsla = (color_value, 100, 50, 100)
+    particles_render[i].fill((color.r, color.g, color.b, color.a))
+    color_value += color_range
 
 print(particles_position)
 print(particles_render)

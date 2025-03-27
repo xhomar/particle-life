@@ -20,7 +20,7 @@ force_decay = 10
 
 # particles amount
 PARTICLES_GROUPS = 2
-PARTICLES_AMOUNT = 10
+PARTICLES_AMOUNT = 200
 PARTICLES_GROUP = int(PARTICLES_AMOUNT / PARTICLES_GROUPS)
 
 # particles groups
@@ -34,7 +34,7 @@ particles_attraction = np.random.randint(-100, 101, (PARTICLES_GROUPS, PARTICLES
 print(particles_position)
 
 # setting color to particles groups
-color_range = int(300 / PARTICLES_GROUPS)
+color_range = int(355 / PARTICLES_GROUPS)
 color_value = 0
 color = pygame.Color(0)
 for i in range(0, PARTICLES_GROUPS):
@@ -72,12 +72,11 @@ while True:
 
     # particles render in SIMULATION surface
     SIMULATION.fill((0, 0, 0))
-    for group in range(0, 3):
+    for group in range(0, PARTICLES_GROUPS):
         for particle in particles_position[group * PARTICLES_GROUP:group * PARTICLES_GROUP + PARTICLES_GROUP]:
             SIMULATION.blit(particles_render[group], (particle[0], particle[1]))
 
     # SIMULATION surface rescale and render on SCREEN
     simulation_render = pygame.transform.scale(SIMULATION, SCREEN_SIZE)
-    SCREEN.fill((0, 0, 0))
     SCREEN.blit(simulation_render)
     pygame.display.update()
